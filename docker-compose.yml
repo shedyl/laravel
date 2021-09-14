@@ -15,6 +15,7 @@ services:
       - ./:/var/www
     networks:
       - laravel
+#    command: "php artisan migrate"
 
   db:
     image: mysql:5.7
@@ -29,7 +30,8 @@ services:
     volumes:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
-      - laravel
+        laravel:
+            ipv4_address: 172.18.0.13
 
   nginx:
     image: nginx:alpine
@@ -46,3 +48,7 @@ services:
 networks:
     laravel:
         driver: bridge
+        ipam:
+            driver: default
+            config:
+                -   subnet: 172.18.0.0/24

@@ -1,1 +1,3 @@
-CREATE DATABASE IF NOT EXISTS `laravel`;
+IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'laravel')
+BEGIN
+    CREATE DATABASE [laravel]
